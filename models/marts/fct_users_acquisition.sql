@@ -7,7 +7,7 @@ WITH user_base AS (
         u.signup_date,
         DATE_TRUNC('week', u.signup_date) as signup_week,
         CASE WHEN r.referred_user_id IS NOT NULL THEN true ELSE false END as is_referred_user,
-        -- Get first transaction details
+        -- get first transaction details
         MIN(t.timestamp) as first_transaction_date,
         MIN(t.amount) as first_transaction_amount
     FROM {{ ref('stg_users') }} u
@@ -22,23 +22,23 @@ user_acquisition AS (
     SELECT 
         country,
         signup_week,
-        -- Basic signup metrics
+        -- basic signup metrics
         COUNT(DISTINCT user_id) as total_signups,
         SUM(CASE WHEN is_referred_user THEN 0 ELSE 1 END) as direct_signups,
         SUM(CASE WHEN is_referred_user THEN 1 ELSE 0 END) as referral_signups,
         
-        -- Activation metrics
+        -- activation metrics
         COUNT(DISTINCT CASE 
             WHEN first_transaction_date IS NOT NULL THEN user_id 
         END) as activated_users,
         
-        -- Time to activation
+        -- time to activation
         AVG(CASE 
             WHEN first_transaction_date IS NOT NULL 
             THEN EXTRACT(EPOCH FROM (first_transaction_date - signup_date))/3600
         END) as avg_hours_to_first_transaction,
         
-        -- First transaction value
+        -- first transaction value
         AVG(CASE 
             WHEN first_transaction_amount IS NOT NULL 
             THEN first_transaction_amount
@@ -51,14 +51,14 @@ user_acquisition AS (
 final AS (
     SELECT 
         *,
-        -- Signup source percentages
+        -- signup source percentages
         ROUND((direct_signups * 100.0 / NULLIF(total_signups, 0)), 2) as direct_signup_percentage,
         ROUND((referral_signups * 100.0 / NULLIF(total_signups, 0)), 2) as referral_signup_percentage,
         
-        -- Activation rate
+        -- activation rate
         ROUND((activated_users * 100.0 / NULLIF(total_signups, 0)), 2) as activation_rate,
         
-        -- Weekly growth metrics
+        -- weekly growth metrics
         LAG(total_signups) OVER (PARTITION BY country ORDER BY signup_week) as prev_week_signups,
         ROUND(
             ((total_signups * 1.0 / NULLIF(LAG(total_signups) OVER (PARTITION BY country ORDER BY signup_week), 0)) - 1) * 100,
