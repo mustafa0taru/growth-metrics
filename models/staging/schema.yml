@@ -1,0 +1,120 @@
+version: 2
+version: 2
+
+sources:
+  - name: staging
+    database: nca
+    schema: staging
+    tables:
+      - name: transactions
+        description: "Contains all user transactions including buys, sells, stakes, and transfers."
+        columns:
+          - name: transaction_id
+            description: "Unique identifier for each transaction."
+            tests:
+              - unique
+              - not_null
+          - name: user_id
+            description: "ID of the user performing the transaction."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('staging', 'users')
+                  field: user_id
+          - name: transaction_type
+            description: "Type of transaction performed (buy, sell, stake, transfer)."
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['buy', 'sell', 'stake', 'transfer']
+          - name: token
+            description: "The token involved in the transaction."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('staging', 'market')
+                  field: token
+          - name: amount
+            description: "Amount of the token involved in the transaction."
+            tests:
+              - not_null
+              - positive_value
+          - name: timestamp
+            description: "Timestamp when the transaction occurred."
+            tests:
+              - not_null
+
+      - name: market
+        description: "Daily market data including token prices and trading volumes."
+        columns:
+          - name: date
+            description: "Date of the market data."
+            tests:
+              - not_null
+          - name: token
+            description: "Token for which the market data is provided."
+            tests:
+              - not_null
+          - name: price
+            description: "Price of the token on the given date."
+            tests:
+              - not_null
+              - positive_value
+          - name: daily_volume
+            description: "Daily trading volume of the token."
+            tests:
+              - not_null
+              - positive_value
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - date
+                - token
+
+      - name: users
+        description: "Information about users including signup details and country of residence."
+        columns:
+          - name: user_id
+            description: "Unique identifier for each user."
+            tests:
+              - unique
+              - not_null
+          - name: signup_date
+            description: "Date when the user signed up."
+            tests:
+              - not_null
+          - name: country
+            description: "Country of residence of the user."
+            tests:
+              - not_null
+          - name: referral_code
+            description: "Referral code used by the user, if any."
+            tests:
+              - unique:
+                  where: "referral_code is not null"
+
+      - name: referrals
+        description: "Details of user referrals including who referred whom and when."
+        columns:
+          - name: referrer_user_id
+            description: "ID of the user who referred another user."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('staging', 'users')
+                  field: user_id
+          - name: referred_user_id
+            description: "ID of the user who was referred."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('staging', 'users')
+                  field: user_id
+          - name: referral_date
+            description: "Date when the referral occurred."
+            tests:
+              - not_null
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - referred_user_id
