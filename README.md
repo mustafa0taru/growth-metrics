@@ -39,7 +39,8 @@ Final analytical models focused on specific business domains:
   - `fct_referrals_performance.sql`: Referral program performance
 
 ## The Dashboard
-The dashboard track growth metrics like user insight, transaction patterns and token performance, all powered by the dbt data models created. You can interact with the Dashboard here [https://app.powerbi.com/view?r=eyJrIjoiYzhjMGZjMTktNDQ4ZS00MTIwLTg1ZTItMTUwZjliNzQ2ZjQzIiwidCI6IjY1OTNhMWIwLTIyMTctNGYwMS05YzdmLTMwNTQ1YTYzYmQ2OSJ9])
+The dashboard track growth metrics like user insight, transaction patterns and token performance, all powered by the dbt data models created. You can interact with the Dashboard here [dashboard https://app.powerbi.com/view?r=eyJrIjoiYzhjMGZjMTktNDQ4ZS00MTIwLTg1ZTItMTUwZjliNzQ2ZjQzIiwidCI6IjY1OTNhMWIwLTIyMTctNGYwMS05YzdmLTMwNTQ1YTYzYmQ2OSJ9] "here)
+[Link with title](https://www.example.com "Link title")
 
 
 ### 1. User Insights
