@@ -40,11 +40,6 @@ Final analytical models focused on specific business domains:
 
 ## The Dashboard
 The dashboard tracks key growth metrics such as user insights, transaction patterns, and token performance, all powered by the dbt data models. You can interact with the Dashboard [here](https://app.powerbi.com/view?r=eyJrIjoiYzhjMGZjMTktNDQ4ZS00MTIwLTg1ZTItMTUwZjliNzQ2ZjQzIiwidCI6IjY1OTNhMWIwLTIyMTctNGYwMS05YzdmLTMwNTQ1YTYzYmQ2OSJ9).
-
-# Links
-- [Example Link](https://www.example.com)
-- [Example Link with Title](https://www.example.com "Link title")
-
 ### 1. User Insights
 <img width="459" alt="Screenshot 2025-01-15 190412" src="https://github.com/user-attachments/assets/b346bf71-e282-41eb-bc99-696d5e13715d" />
 
