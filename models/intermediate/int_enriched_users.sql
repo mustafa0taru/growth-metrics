@@ -1,7 +1,5 @@
 {{ config(materialized='view') }}
 
-{{ config(materialized='view') }}
-
 WITH user_first_transaction AS (
     SELECT
         user_id,
