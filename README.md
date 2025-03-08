@@ -29,14 +29,21 @@ Dimensional models and enriched datasets:
 Final analytical models focused on specific business domains:
 - User Analytics:
   - `fct_user_metrics.sql`: Core user metrics
+![Screenshot 2025-03-08 124820](https://github.com/user-attachments/assets/6e935c77-379a-4599-a6bc-3eda1f8f6b69)
   - `fct_user_engagement.sql`: User engagement analysis
+![Screenshot 2025-03-08 124938](https://github.com/user-attachments/assets/645e1a24-6a1b-4411-a6af-83305d3d5d73)
   - `fct_user_retention.sql`: Retention metrics
+![Screenshot 2025-03-08 125046](https://github.com/user-attachments/assets/503ccf78-e441-483f-98b0-f1c620402b95)
   - `fct_users_acquisition.sql`: User acquisition analytics
 - Transaction Analytics:
   - `fct_transaction_metrics.sql`: Transaction performance metrics
+![Screenshot 2025-03-08 125243](https://github.com/user-attachments/assets/df1af371-c239-4f43-87cf-6861af454508)
   - `fct_token_metrics.sql`: Token-specific analytics
+![Screenshot 2025-03-08 125347](https://github.com/user-attachments/assets/d077a4ee-c2cf-4a39-b344-3810f0bff49f)
 - Referral Analytics:
   - `fct_referrals_performance.sql`: Referral program performance
+![Screenshot 2025-03-08 125455](https://github.com/user-attachments/assets/fca40d17-70e2-4388-a481-e1acafdf4dbd)
+
 
 ## The Dashboard
 The dashboard tracks key growth metrics such as user insights, transaction patterns, and token performance, all powered by the dbt data models. You can interact with the Dashboard [here](https://app.powerbi.com/view?r=eyJrIjoiYzhjMGZjMTktNDQ4ZS00MTIwLTg1ZTItMTUwZjliNzQ2ZjQzIiwidCI6IjY1OTNhMWIwLTIyMTctNGYwMS05YzdmLTMwNTQ1YTYzYmQ2OSJ9).
